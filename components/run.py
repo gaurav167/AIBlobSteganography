@@ -3,6 +3,7 @@ import cv2
 
 from data_embedder import AISteganography
 from frame_manager import FrameManager
+from crypto import Crypto
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--image", "-i", action='store_true', help='Image flag; If turned on, media is treated as an image')
@@ -24,6 +25,17 @@ if args.video:
 	print("Retrieved Data : ", video_handler.extractData())
 
 elif args.image:
+	args.data = args.data.encode('utf-8')
 	image = cv2.imread(args.source)
+	""" Embed Data in Image """
+	crypto = Crypto(key)
+	encrypted_data = crypto.mac(args.data)
 	frame_handler = FrameManager(image, key)
-	frame_handler.embed(self.data[0])
+	for byte in encrypted_data:
+		if frame_handler.full():
+			break
+		else:
+			frame_handler.embed(byte)
+	name = args.source.split('/')[-1].split('.')[0]
+	extension = '.' + args.source.split('/')[-1].split('.')[1]
+	frame_handler.save_frame("Modified_" + name + extension)

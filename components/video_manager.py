@@ -42,7 +42,7 @@ class VideoManager:
 		extension = '.' + self.media_source.split(sep)[-1].split('.')[1]
 		width = int(self.video.get(cv2.CAP_PROP_FRAME_WIDTH))
 		height = int(self.video.get(cv2.CAP_PROP_FRAME_HEIGHT))
-		fps = int(self.video.get(cv2.CAP_PROP_FPS))
+		fps = int(self.video.get(cv2.CAP_PROP_FPS))//2
 		out = cv2.VideoWriter(path.join(media_path, 'Modified_' + name + extension), cv2.VideoWriter_fourcc('M','J','P','G'), fps, (width, height))
 		success, frame = self.video.read()
 		success = True
