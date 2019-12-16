@@ -12,3 +12,9 @@
 ## Run tests:
 	pytest [<filename>] [<-v>]
 from root directory.
+
+
+## For Contributors:
+* Open issue for suggestions or improvements.
+* Open PR for every change.
+* Get code reviewed before pushing.
